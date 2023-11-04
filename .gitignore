@@ -1,2 +1,4 @@
 .idea/
 __pycache__/
+bot_state.json
+bot_state.json.bak

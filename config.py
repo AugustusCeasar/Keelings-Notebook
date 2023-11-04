@@ -1,15 +1,19 @@
 import re
 
+bot_state_json_path = "bot_state.json"
+
+
 team_names_list = ["aksu", "AugustusCaesar", "J0N4LD", "xdg", "HaverOfFun", "Baa Ram Wu",
                    "Gathzen", "Jai", "profwacko", "reubenpieters"]
 
+owner_user_id = 393788845021200385
 brewing_channel_id = 1133092635993718794
 find_the_truth_role_id = 1167845775875788851
 
 # decoding_re must contain a timestring group, where XX/XX/XXXX and XX:XX:XX are located
 # and a timezone group containing the timezone (that can only be an integer relative to GMT with current impl)
 # GMT is advised against in times of daylight savings
-time_decoding_re = re.compile(r"%(?P<timestring>.*)[Uu][Tt][Cc](?P<timezone>[+-]\d\d?)?%")  # (?P<tzmode>UTC|GMT)
+time_decoding_re = re.compile(r"%(?P<timestring>.*)([Uu][Tt][Cc](?P<timezone>[+-]\d\d?))?%")  # (?P<tzmode>UTC|GMT)
 
 help_message = "Welcome to the usage of the most useful tool of the net. Its abilities are:\n" \
                "-**Find the Truth**: Automatic addition of people with a role to all threads created in certain " \
