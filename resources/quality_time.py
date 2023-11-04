@@ -36,13 +36,14 @@ def parse_time_message(s: str, author_id: int = None, bot_state: BotState = None
     seconds = (parsed_time.group("seconds") if parsed_time else None) or 0
     parsed_dt_before_tz = datetime.datetime(int(year), int(month), int(day), int(hours), int(minutes), int(seconds))
 
-    if author_id and bot_state and author_id in bot_state.user_timezone_dict:
-        tz = pytz.timezone(bot_state.user_timezone_dict[author_id])
-        localized_dt = tz.localize(parsed_dt_before_tz)
-        dt_after_tz_ofset = localized_dt.astimezone(pytz.utc)
-    else:
-        if possible_match.group("timezone") is None:
+    if possible_match.group("timezone") is None:
+        if author_id and bot_state and author_id in bot_state.user_timezone_dict:
+            tz = pytz.timezone(bot_state.user_timezone_dict[author_id])
+            localized_dt = tz.localize(parsed_dt_before_tz)
+            dt_after_tz_ofset = localized_dt.astimezone(pytz.utc)
+        else:
             return "I haven't been briefed on your timezone, please provide one or use the command set_up_timezone."
+    else:
         timezone_offset_parsed = datetime.timedelta(hours=int(possible_match.group("timezone")))
         dt_after_tz_ofset = parsed_dt_before_tz - timezone_offset_parsed
 
