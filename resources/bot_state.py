@@ -15,18 +15,8 @@ class EnhancedJSONEncoder(json.JSONEncoder):
 
 @dataclass_json
 @dataclass(slots=True)
-class ConnectedChannels:
-    guild_id_a: int
-    guild_id_b: int
-    channel_id_a: int
-    channel_id_b: int
-
-
-@dataclass_json
-@dataclass(slots=True)
 class BotState:
     user_timezone_dict: dict[int, str]
-    connected_channels: list[ConnectedChannels]
 
     def save_to_json(self, path, override=False) -> None:
         if os.path.isfile(path) and not override:
@@ -39,4 +29,3 @@ class BotState:
     def load_from_json_path(cls, path):
         with open(path, "r") as f:
             return BotState.from_json(f.read())
-

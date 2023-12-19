@@ -4,7 +4,6 @@ import time
 from typing import Optional
 
 import pytz
-from pytz import timezone
 
 from config import time_decoding_re
 from resources.bot_state import BotState

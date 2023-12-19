@@ -10,8 +10,7 @@ from resources.find_the_truth import add_everyone_to_thread
 from resources.quality_time import parse_time_message
 # from resources.net_interface import get_online_team_members
 
-
-bot_state = BotState(user_timezone_dict={}, connected_channels=[])
+bot_state = BotState(user_timezone_dict={})
 
 
 def save_bot_state():
@@ -41,7 +40,6 @@ def main():  # this might be the rare situation tha twe run this all on import a
             possible_time = parse_time_message(message.content, message.author.id, bot_state)
             if possible_time is not None:
                 await message.reply(possible_time)
-                print("found time")
 
     @bot.event
     async def on_thread_create(thread):
@@ -62,12 +60,12 @@ def main():  # this might be the rare situation tha twe run this all on import a
                                   f"see https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568 "
                                   f"for correct formatting", ephemeral=True)
 
-    @bot.command(description='Owner only')  # magic discord bs for fixing slash commands becoming invisible
+    @bot.command(description='Owner only. Who even knows how this works')  # magic discord bs for fixing slash commands becoming invisible
     async def sync(ctx):
         print("sync command")
         if ctx.author.id == owner_user_id:
-            await bot.tree.sync()
-            await ctx.send('Command tree synced.')
+            # await app_commands.CommandTree(bot).sync()
+            await ctx.send('NOT IMPLEMENTED. Command tree synced.')
         else:
             await ctx.send('You must be the owner to use this command!')
 

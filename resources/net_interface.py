@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 from config import team_names_list
 
+
 @dataclass
 class HtmlElement:
     name: str
