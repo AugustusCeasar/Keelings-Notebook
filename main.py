@@ -6,6 +6,7 @@ import pytz
 
 from config import help_message, bot_state_json_path, owner_user_id
 from resources.bot_state import BotState
+from resources.custom_breaking import get_random_breaker
 from resources.find_the_truth import add_everyone_to_thread
 from resources.quality_time import parse_time_message
 # from resources.net_interface import get_online_team_members
@@ -59,6 +60,10 @@ def main():  # this might be the rare situation tha twe run this all on import a
             await context.respond(f"{timezone} is not a valid timezone, "
                                   f"see https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568 "
                                   f"for correct formatting", ephemeral=True)
+
+    @bot.command(description="Get your very own custom TAI breaker.")
+    async def custom_tai_breaker(context):
+        await context.respond(get_random_breaker())
 
     @bot.command(description='Owner only. Who even knows how this works')  # magic discord bs for fixing slash commands becoming invisible
     async def sync(ctx):
